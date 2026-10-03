@@ -1,7 +1,7 @@
 <?php
 
 namespace Tests\Feature\Api\v1;
-
+use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use PHPUnit\Event\Test\FailedSubscriber;
@@ -36,7 +36,6 @@ class TaskTest extends TestCase
     public function test_simpan_task(): void
     {
     //arrange
-
     //act(arrange dan act digabungkan dalam sekali jalan)
     $response = $this->postJson('/api/v1/tasks', [
         'name' => 'Test Task',
@@ -88,14 +87,19 @@ class TaskTest extends TestCase
     public function test_hapus_task(): void
     {
         //arrange
-        $task = \App\Models\Task::factory()->create();
+        $task = Task::factory()->create();
         //act
         $response = $this->deleteJson('/api/v1/tasks/' . $task->id);
         //assert
         $response->assertNoContent();
-
         $this->assertDatabaseMissing('tasks', [
             'id' => $task->id,
         ]);
+        $response->assertJson([
+            'success' => true,
+            'message' => 'Task deleted successfully.',
+            'data' => null,
+            
+        ], 200);
     }
 }
