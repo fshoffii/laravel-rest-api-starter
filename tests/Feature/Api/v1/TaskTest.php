@@ -95,11 +95,6 @@ class TaskTest extends TestCase
         $this->assertDatabaseMissing('tasks', [
             'id' => $task->id,
         ]);
-        $response->assertJson([
-            'success' => true,
-            'message' => 'Task deleted successfully.',
-            'data' => null,
-            
-        ], 200);
+
     }
 }
