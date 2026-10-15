@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:sanctum');
+    })->middleware('auth:sanctum');
 
 // Tanpa prefix v1
 Route::prefix('v1')->group(function () {

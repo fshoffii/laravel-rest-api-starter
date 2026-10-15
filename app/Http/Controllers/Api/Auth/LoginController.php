@@ -31,7 +31,7 @@ class LoginController extends Controller
             'token' => $token,
             'user'=> $user
         ],  Response::HTTP_OK   
-         // Hasil 201 menandakan bahwa data berhasil dibuat
+         // Hasil 200 menandakan bahwa data berhasil ditemukan dan dikembalikan (login berhasil)
         );
     }
 }
